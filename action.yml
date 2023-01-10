@@ -1,0 +1,9 @@
+name: 'Deploy WordPress'
+description: 'Deploy WordPress code to a server'
+author: 'rtCamp'
+runs:
+  using: 'docker'
+  image: 'docker://quay.io/pantheon-public/php-ci:2.x'
+branding:
+  icon: 'upload-cloud'
+  color: 'yellow'
