@@ -50,6 +50,7 @@ runs:
         MACHINETOKEN: ${{ inputs.MACHINETOKEN }}
         PANTHON_PRIVATE_KEY: ${{ inputs.PANTHON_PRIVATE_KEY }}
       run: ${{ github.action_path }}/deploy.sh
+      working-directory: .
       shell: bash
 branding:
   icon: 'upload-cloud'
