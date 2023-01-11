@@ -1,9 +1,17 @@
-name: 'Deploy WordPress'
+name: 'Deploy WordPress to Pantheon'
 description: 'Deploy WordPress code to a server'
 author: 'rtCamp'
 runs:
   using: 'docker'
   image: 'docker://quay.io/pantheon-public/php-ci:2.x'
+  env:
+    env:
+    PANTHEONSITEUUID: "${{ secrets.PANTHEONSITEUUID }}"
+    PANTHEONEMAIL: "${{ secrets.PANTHEONEMAIL }}"
+    MACHINETOKEN: "${{ secrets.MACHINETOKEN }}"
+    STAGING_PRIVATE_KEY: "${{ secrets.STAGING_PRIVATE_KEY }}"
+    PROJECT_ROOT: "$(pwd)"
+    GH_REF2: "${{ github.ref }}"
 branding:
   icon: 'upload-cloud'
   color: 'yellow'
