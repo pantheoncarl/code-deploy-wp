@@ -22,7 +22,12 @@ sudo ln -s ~/terminus/terminus /usr/local/bin/terminus
 
 # /home/runner/terminus/vendor/bin/terminus art
 
+printf "[\e[0;34mNOTICE\e[0m] Terminus Setup START!!!.\n"
+
 echo "$MACHINETOKEN"
+echo $MACHINETOKEN
+echo PANTHEONEMAIL
+printf "[\e[0;34mNOTICE\e[0m] Terminus Setup asdfasdffds!!.\n"
 terminus self:info
 terminus art
 terminus auth:login --machine-token="$MACHINETOKEN" --email="$PANTHEONEMAIL"
