@@ -1,6 +1,6 @@
 name: 'Deploy WordPress to Pantheon'
-description: 'Deploy WordPress code to a server'
-author: 'rtCamp'
+description: 'Deploy WordPress codebase to a Pantheon appserver'
+author: 'carl-alberto'
 runs:
   using: 'docker'
   image: 'docker://quay.io/pantheon-public/php-ci:2.x'
