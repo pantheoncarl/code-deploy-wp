@@ -45,10 +45,7 @@ runs:
   steps:
     - id: deploy
       env:
-        PANTHEONSITEUUID: ${{ inputs.PANTHEONSITEUUID }}
-        PANTHEONEMAIL: ${{ inputs.PANTHEONEMAIL }}
-        MACHINETOKEN: ${{ inputs.MACHINETOKEN }}
-        PANTHON_PRIVATE_KEY: ${{ inputs.PANTHON_PRIVATE_KEY }}
+        TESTVARSSS: "sdgfsdfgdsgfdfg"
       run: |
         ${{ github.action_path }}/scripts/github/load-variables.sh
         ${{ github.action_path }}/scripts/github/setup-terminus.sh
