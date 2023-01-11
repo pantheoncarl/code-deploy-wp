@@ -48,6 +48,8 @@ runs:
     PANTHEONEMAIL: ${{ inputs.PANTHEONEMAIL }}
     MACHINETOKEN: ${{ inputs.MACHINETOKEN }}
     PANTHON_PRIVATE_KEY: ${{ inputs.PANTHON_PRIVATE_KEY }}
+  args:
+    - ${{ inputs.FLAGS }}
 branding:
   icon: 'upload-cloud'
   color: 'yellow'
