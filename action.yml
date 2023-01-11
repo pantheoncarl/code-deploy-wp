@@ -43,13 +43,6 @@ author: 'carl-alberto'
 runs:
   using: 'docker'
   image: 'docker://quay.io/pantheon-public/php-ci:2.x'
-  env:
-    PANTHEONSITEUUID: ${{ inputs.PANTHEONSITEUUID }}
-    PANTHEONEMAIL: ${{ inputs.PANTHEONEMAIL }}
-    MACHINETOKEN: ${{ inputs.MACHINETOKEN }}
-    PANTHON_PRIVATE_KEY: ${{ inputs.PANTHON_PRIVATE_KEY }}
-  args:
-    - ${{ inputs.FLAGS }}
   steps:
     - id: deploy
       env:
