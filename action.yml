@@ -41,8 +41,7 @@ inputs:
     required: false
 author: 'carl-alberto'
 runs:
-  using: 'docker'
-  image: 'docker://quay.io/pantheon-public/php-ci:2.x'
+  using: 'composite'
   steps:
     - id: deploy
       env:
