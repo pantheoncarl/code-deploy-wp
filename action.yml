@@ -42,13 +42,15 @@ inputs:
 author: 'carl-alberto'
 runs:
   using: 'composite'
+  env:
+    PANTHEONSITEUUID: ${{ inputs.PANTHEONSITEUUID }}
+    PANTHEONEMAIL: ${{ inputs.PANTHEONEMAIL }}
+    MACHINETOKEN: ${{ inputs.MACHINETOKEN }}
+    PANTHON_PRIVATE_KEY: ${{ inputs.PANTHON_PRIVATE_KEY }}
+  args:
+    - ${{ inputs.FLAGS }}
   steps:
     - id: deploy
-      env:
-        PANTHEONSITEUUID: ${{ secrets.PANTHEONSITEUUID }}
-        PANTHEONEMAIL: ${{ secrets.PANTHEONEMAIL }}
-        MACHINETOKEN: ${{ secrets.MACHINETOKEN }}
-        PANTHON_PRIVATE_KEY: ${{ secrets.PANTHON_PRIVATE_KEY }}
       run: |
         ${{ github.action_path }}/scripts/github/load-variables.sh
         ${{ github.action_path }}/scripts/github/setup-terminus.sh
