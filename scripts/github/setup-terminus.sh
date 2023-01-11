@@ -22,11 +22,12 @@ sudo ln -s ~/terminus/terminus /usr/local/bin/terminus
 
 # /home/runner/terminus/vendor/bin/terminus art
 
+echo "$MACHINETOKEN"
 terminus self:info
 terminus art
 terminus auth:login --machine-token="$MACHINETOKEN" --email="$PANTHEONEMAIL"
 terminus auth:whoami
-terminus connection:set $PANTHEONSITENAME.$PANTHEONENV sftp
+#terminus connection:set $PANTHEONSITENAME.$PANTHEONENV sftp
 
 
 
