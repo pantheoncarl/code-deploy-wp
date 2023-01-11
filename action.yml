@@ -50,6 +50,15 @@ runs:
     PANTHON_PRIVATE_KEY: ${{ inputs.PANTHON_PRIVATE_KEY }}
   args:
     - ${{ inputs.FLAGS }}
+  steps:
+    - id: deploy
+      env:
+        PANTHEONSITEUUID: ${{ inputs.PANTHEONSITEUUID }}
+        PANTHEONEMAIL: ${{ inputs.PANTHEONEMAIL }}
+        MACHINETOKEN: ${{ inputs.MACHINETOKEN }}
+        PANTHON_PRIVATE_KEY: ${{ inputs.PANTHON_PRIVATE_KEY }}
+      run: ${{ github.action_path }}/deploy.sh
+      shell: bash
 branding:
   icon: 'upload-cloud'
   color: 'yellow'
