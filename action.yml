@@ -49,7 +49,10 @@ runs:
         PANTHEONEMAIL: ${{ inputs.PANTHEONEMAIL }}
         MACHINETOKEN: ${{ inputs.MACHINETOKEN }}
         PANTHON_PRIVATE_KEY: ${{ inputs.PANTHON_PRIVATE_KEY }}
-      run: ${{ github.action_path }}/deploy.sh
+      run: |
+        ${{ github.action_path }}/scripts/github/load-variables.sh
+        ${{ github.action_path }}/scripts/github/setup-terminus.sh
+        printf "[\e[0;34mNOTICE\e[0m] Terminus Setup COMPLETE!!!.\n"
       working-directory: .
       shell: bash
 branding:
