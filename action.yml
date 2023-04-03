@@ -44,43 +44,17 @@ branding:
   icon: 'upload-cloud'
   color: 'yellow'
 runs:
-  jobs:
-    my-job:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
-
-        - name: Pull Docker Image
-          run: docker pull quay.io/pantheon-public/build-tools-ci:8.x-php7.4
-
-    deploy_to_pantheon:
-      container:
-        image: quay.io/pantheon-public/build-tools-ci:6.x
-        options: --user root
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
-
-        # Set TERMINUS_ENV and related environment variables.
-        # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
-        - name: setup-environment-vars
-          run: /build-tools-ci/scripts/set-environment
-
-        # Deploy to Pantheon
-        - name: deploy to Pantheon
-          run: |
-            #echo "$SSH_PRIVATE_KEY" > ../private.key
-            #chmod 600 ../private.key
-            #eval `ssh-agent -s`
-            #ssh-add ../private.key
-            #source $BASH_ENV
-            #./.ci/deploy/pantheon/dev-multidev
-            ls
-            terminus self:info
-            ls /build-tools-ci/scripts
-            cd /
-            ls 
+  using: 'docker'
+  steps:
+    - id: deploy
+      env:
+        TESTVARSSS: "sdgfsdfgdsgfdfg"
+      run: |
+        ${{ github.action_path }}/scripts/github/load-variables.sh
+        ${{ github.action_path }}/scripts/github/setup-terminus.sh
+        printf "[\e[0;34mNOTICE\e[0m] Terminus Setup COMPLETE!!!.\n"
+      working-directory: .
+      shell: bash
+branding:
+  icon: 'upload-cloud'
+  color: 'yellow'
