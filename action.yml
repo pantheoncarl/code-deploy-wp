@@ -44,6 +44,6 @@ branding:
   icon: 'upload-cloud'
   color: 'yellow'
 runs:
-  using: 'docker'
+  #using: 'docker'
   image: quay.io/pantheon-public/build-tools-ci:8.x-php7.4
 
