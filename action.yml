@@ -40,18 +40,27 @@ inputs:
     description: "File containing custom scripts run after the rsync"
     required: false
 author: 'carl-alberto'
+branding:
+  icon: 'upload-cloud'
+  color: 'yellow'
 runs:
   using: 'composite'
+  container:
+    image: quay.io/pantheon-public/build-tools-ci:6.x
+    options: --user root
+  runs-on: ubuntu-latest
   steps:
     - id: deploy
       env:
         TESTVARSSS: "sdgfsdfgdsgfdfg"
       run: |
-        ${{ github.action_path }}/scripts/github/load-variables.sh
-        ${{ github.action_path }}/scripts/github/setup-terminus.sh
-        printf "[\e[0;34mNOTICE\e[0m] Terminus Setup COMPLETE!!!.\n"
+        ls
+        terminus self:info
+        ls /build-tools-ci/scripts
+        cd /
+        ls 
+        #${{ github.action_path }}/scripts/github/load-variables.sh
+        #${{ github.action_path }}/scripts/github/setup-terminus.sh
+        #printf "[\e[0;34mNOTICE\e[0m] Terminus Setup COMPLETE!!!.\n"
       working-directory: .
       shell: bash
-branding:
-  icon: 'upload-cloud'
-  color: 'yellow'
