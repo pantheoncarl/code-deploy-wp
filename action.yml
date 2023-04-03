@@ -46,16 +46,4 @@ branding:
 runs:
   using: 'docker'
   image: quay.io/pantheon-public/build-tools-ci:6.x
-  steps:
-    - id: deploy
-      env:
-        TESTVARSSS: "sdgfsdfgdsgfdfg"
-      run: |
-        ${{ github.action_path }}/scripts/github/load-variables.sh
-        ${{ github.action_path }}/scripts/github/setup-terminus.sh
-        printf "[\e[0;34mNOTICE\e[0m] Terminus Setup COMPLETE!!!.\n"
-      working-directory: .
-      shell: bash
-branding:
-  icon: 'upload-cloud'
-  color: 'yellow'
+
