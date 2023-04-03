@@ -45,15 +45,16 @@ branding:
   color: 'yellow'
 runs:
   using: 'composite'
-  container:
-    image: quay.io/pantheon-public/build-tools-ci:6.x
-    options: --user root
-  runs-on: ubuntu-latest
+  #container:
+  #  image: quay.io/pantheon-public/build-tools-ci:6.x
+  #  options: --user root
+  #runs-on: ubuntu-latest
   steps:
     - id: deploy
       env:
         TESTVARSSS: "sdgfsdfgdsgfdfg"
       run: |
+        docker pull quay.io/pantheon-public/build-tools-ci:8.x-php7.4
         ls
         terminus self:info
         ls /build-tools-ci/scripts
