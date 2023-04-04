@@ -46,4 +46,3 @@ branding:
 runs:
   using: 'docker'
   image: docker://pantheonpublic/build-tools-ci:8.x-php7.4
-  options: --user root
