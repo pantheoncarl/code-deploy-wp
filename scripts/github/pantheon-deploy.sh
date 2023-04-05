@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export PROJECT_ROOT="$(pwd)"
-. $PROJECT_ROOT/config  
+ls
 cd $PROJECT_ROOT
+ls
 
 # deploy pantheon yml files
 rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' ./pantheon.yml --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/
