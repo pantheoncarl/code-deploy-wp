@@ -33,32 +33,34 @@ echo "SSH PRIVATE KEY IMPORTED!!!"
 cd $PROJECT_ROOT
 ls
 
-# deploy pantheon yml files
-rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' ./pantheon.yml --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/
+# deploy all files in root
+rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' . --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/ --exclude .github/ --exclude .vscode/
 printf "[\e[0;34mNOTICE\e[0m] Deployed pantheon.yml file\n"
 
 # deploy private folder for quicksilver scripts
-rsync -rLvzc --ipv4 --progress -e 'ssh -p 2222' ./web/. --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/web/private/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/
+#rsync -rLvzc --ipv4 --progress -e 'ssh -p 2222' ./web/. --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/web/private/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/
 printf "[\e[0;34mNOTICE\e[0m] Deployed all code in nested docroot\n"
 
 # deploy plugins and themes
-rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' ./web/wp-content/. --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/web/wp-content/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/
+#rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' ./web/wp-content/. --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/web/wp-content/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/
 printf "[\e[0;34mNOTICE\e[0m] Deployed plugin and themes\n"
 
 # deploy core via rsync + wp-config
 # rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' ./web/wp/. --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/web/wp/ --exclude='*.git*' --exclude node_modules/ --exclude wp-content/ --exclude gulp/ --exclude source/
 
 #dont forget to elete the config to avoid redirect loop
-rm $PROJECT_ROOT/web/wp/wp-config.php
+#rm $PROJECT_ROOT/web/wp/wp-config.php
 
 # deploy core and root files
-rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' ./web/. --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/web/ --exclude='*.git*' --exclude node_modules/ --exclude wp-content/ --exclude gulp/ --exclude source/
+#rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' ./web/. --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/web/ --exclude='*.git*' --exclude node_modules/ --exclude wp-content/ --exclude gulp/ --exclude source/
 
 terminus art
 
+
+
 MSG1="$GH_REF2"
 export MSG1
-DEPLOYMSG="Complete rebuild. Deployed from GitHub $MSG1"
+DEPLOYMSG="Complete rebuild. Deployed from GitHub ${{ github.event.head_commit.message }}"
 export DEPLOYMSG
 echo "$DEPLOYMSG"
 #echo ::set-env name=PULL_NUMBER::$(echo "$GH_REF2" | awk -F / '{print $3}')
