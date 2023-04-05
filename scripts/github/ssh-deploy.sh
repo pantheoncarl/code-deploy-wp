@@ -71,7 +71,7 @@ DEPLOYMSG="Complete rebuild. Deployed from GitHub ${{ github.event.head_commit.m
 export DEPLOYMSG
 echo "$DEPLOYMSG"
 #echo ::set-env name=PULL_NUMBER::$(echo "$GH_REF2" | awk -F / '{print $3}')
-export SITENAME="$(terminus site:info  --format list --field name -- ${{ steps.pantheon-deploy.outputs.PANTHEONSITEUUID}}"
+export SITENAME="$(terminus site:info  --format list --field name -- ${{ PANTHEONSITEUUID }}"
 
 terminus env:commit --message "$DEPLOYMSG" --force -- $SITENAME.$PANTHEONENV
 

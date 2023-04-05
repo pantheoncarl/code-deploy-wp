@@ -1,5 +1,5 @@
 name: 'Deploy WordPress to Pantheon'
-description: 'Deploy WordPress codebase to a Pantheon appserver'
+description: 'Deploy WordPress codebase to Pantheon'
 inputs:
   PANTHEON_PRIVATE_KEY:
     description: "The private RSA key you will save in the Github Secrets"
