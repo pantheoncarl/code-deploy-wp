@@ -1,15 +1,15 @@
-Required secret variables:
+**Required secret variables:**
 
-PANTHEON_PRIVATE_KEY
-PANTHEON_TERMINUS_MACHINE_TOKEN
+- PANTHEON_PRIVATE_KEY
+- PANTHEON_TERMINUS_MACHINE_TOKEN
 
 
 
-Required variables in the site's repo
+**Required variables in the site's repo**
 
-PANTHEONSITEUUID
-PANTHEONEMAIL
-PANTHEONENV
+- PANTHEONSITEUUID
+- PANTHEONEMAIL
+- PANTHEONENV
 
 
 
