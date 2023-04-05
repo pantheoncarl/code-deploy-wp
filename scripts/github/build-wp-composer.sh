@@ -30,11 +30,12 @@ chmod 700 "$SSH_DIR"
 touch "$SSH_DIR/id_rsa1"
 touch "$SSH_DIR/config"
 echo "Host *\n\tStrictHostKeyChecking no\n\n" > "$SSH_DIR/config"
-# echo "${{ secrets.STAGING_PRIVATE_KEY }}" > "$SSH_DIR/id_rsa1"
-echo "$PANTHEON_PRIVATE_KEY" > "$SSH_DIR/id_rsa1"
+echo "${{ secrets.PANTHEON_PRIVATE_KEY }}" > "$SSH_DIR/id_rsa1"
+#echo "$PANTHEON_PRIVATE_KEY" > "$SSH_DIR/id_rsa1"
 chmod 600 "$SSH_DIR/id_rsa1"
 chmod 600 "$SSH_DIR/config"
 eval "$(ssh-agent -s)"
+eval `ssh-agent -s`
 ssh-add "$SSH_DIR/id_rsa1"
 ssh-add -l
 cat $SSH_DIR/id_rsa1
