@@ -67,13 +67,17 @@ terminus art
 
 MSG1="$GH_REF2"
 export MSG1
+echo github.event.head_commit.message
+echo terminus site:info  --format list --field name -- ${{ PANTHEONSITEUUID }}
+
 DEPLOYMSG="Complete rebuild. Deployed from GitHub ${{ github.event.head_commit.message }}"
 export DEPLOYMSG
 echo "$DEPLOYMSG"
 #echo ::set-env name=PULL_NUMBER::$(echo "$GH_REF2" | awk -F / '{print $3}')
-export SITENAME="$(terminus site:info  --format list --field name -- ${{ PANTHEONSITEUUID }}"
+export SITENAME="$(terminus site:info  --format list --field name -- ${{ PANTHEONSITEUUID }})"
+echo ${{ github.event.head_commit.message }}
 
-terminus env:commit --message "$DEPLOYMSG" --force -- $SITENAME.$PANTHEONENV
+terminus env:commit --message "$MSG1" --force -- $SITENAME.$PANTHEONENV
 
 printf "[\e[0;34mNOTICE\e[0m] Deployed core and wp-config\n"
 
