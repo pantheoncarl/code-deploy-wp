@@ -29,8 +29,14 @@ mkdir -p "$SSH_DIR"
 chmod 700 "$SSH_DIR"
 touch "$SSH_DIR/id_rsa1"
 touch "$SSH_DIR/config"
-echo "Host *\n\tStrictHostKeyChecking no\n\n" > "$SSH_DIR/config"
+#echo "Host *\n\tStrictHostKeyChecking no\n\n" > "$SSH_DIR/config"
 #echo "${{ secrets.PANTHEON_PRIVATE_KEY }}" > "$SSH_DIR/id_rsa1"
+
+mkdir -p ~/.ssh && echo "Host *" > ~/.ssh/config && echo " StrictHostKeyChecking no" >> ~/.ssh/config
+
+cd ~
+pwd
+
 echo "$PANTHEON_PRIVATE_KEY" > "$SSH_DIR/id_rsa1"
 chmod 600 "$SSH_DIR/id_rsa1"
 chmod 600 "$SSH_DIR/config"
@@ -43,7 +49,7 @@ cat $SSH_DIR/config
 cat $SSH_DIR/known_hosts
 cat ~/.ssh/known_hosts
 ssh-keygen -R hostname
-sudo cat /etc/ssh/ssh_config
+sudo cat ~/.ssh/ssh_config
 echo "SSH PRIVATE KEY IMPORTED!!!"
 
 # deploy pantheon yml files
