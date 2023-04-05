@@ -10,36 +10,21 @@ inputs:
   PANTHEON_EMAIL:
     description: "User's email for Pantheon authentication"
     required: true
-  FLAGS:
-    description: "Optional flags for the deployment"
+  PANTHEONENV:
+    description: "Default env to be deployed,"
     required: false
-    default: '-azvr --inplace --exclude=".*"'
+    default: 'dev'
+  PANTHEONENV_AUTODEPLOY:
+    description: "Can be set to be autodeployed to test and live, if set to false, it will be default to PANTHEONENV"
+    required: false
+    default: 'false'
   CACHE_CLEAR:
-    description: "Optional WPE Clear cache"
+    description: "Cache clear after deploy"
     required: false
-    default: true
+    default: false
   SRC_PATH:
     description: "An optional source directory to deploy other than the root directory that is being versioned."
     default: "."
-    required: false
-  REMOTE_PATH:
-    description: "An optional destination directory to deploy to other than the WordPress root."
-    default: ""
-    required: false
-  WPE_ENV:
-    description: "Destination to deploy to WPE"
-    required: false
-  PRD_ENV:
-    description: "Destination to deploy to WPE Prod"
-    required: false
-  STG_ENV:
-    description: "Destination to deploy to WPE Stage"
-    required: false
-  DEV_ENV:
-    description: "Destination to deploy to WPE Dev"
-    required: false
-  SCRIPT:
-    description: "File containing custom scripts run after the rsync"
     required: false
 author: 'carl-alberto'
 runs:
@@ -51,8 +36,9 @@ runs:
       run: |
         ${{ github.action_path }}/scripts/github/setup-terminus.sh
         ${{ github.action_path }}/scripts/github/setup-terminus-plugins.sh
-        ${{ github.action_path }}/scripts/github/setup-ssh.sh
-        ${{ github.action_path }}/scripts/github/pantheon-deploy.sh
+        ${{ github.action_path }}/scripts/github/ssh-deploy.sh
+        #${{ github.action_path }}/scripts/github/ssh-deploy-nesteddocroot.sh
+        #${{ github.action_path }}/scripts/github/pantheon-deploy.sh
         printf "[\e[0;34mNOTICE\e[0m] Terminus Setup COMPLETE!!!.\n"
       working-directory: .
       shell: bash
