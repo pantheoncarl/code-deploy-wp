@@ -35,10 +35,17 @@ ls
 
 # deploy all files in root
 rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' . --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/ --exclude .github/ --exclude .vscode/
+
+#deploy pantheon yml file
+#rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' ./pantheon.yml --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/ --exclude .github/ --exclude .vscode/
 printf "[\e[0;34mNOTICE\e[0m] Deployed pantheon.yml file\n"
 
+# deploy all files in nested docroot
+#rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' ./web/. --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/web/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/ --exclude .github/ --exclude .vscode/ --exclude='pantheon*.yml'
+printf "[\e[0;34mNOTICE\e[0m] Deployed web files\n"
+
 # deploy private folder for quicksilver scripts
-#rsync -rLvzc --ipv4 --progress -e 'ssh -p 2222' ./web/. --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/web/private/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/
+#rsync -rLvzc --ipv4 --progress -e 'ssh -p 2222' ./web/. --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/web/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/
 printf "[\e[0;34mNOTICE\e[0m] Deployed all code in nested docroot\n"
 
 # deploy plugins and themes
@@ -64,8 +71,9 @@ DEPLOYMSG="Complete rebuild. Deployed from GitHub ${{ github.event.head_commit.m
 export DEPLOYMSG
 echo "$DEPLOYMSG"
 #echo ::set-env name=PULL_NUMBER::$(echo "$GH_REF2" | awk -F / '{print $3}')
+export SITENAME="$(terminus site:info  --format list --field name -- ${{ steps.pantheon-deploy.outputs.PANTHEONSITEUUID}}"
 
-terminus env:commit --message "$DEPLOYMSG" --force -- $PANTHEONSITENAME.$PANTHEONENV
+terminus env:commit --message "$DEPLOYMSG" --force -- $SITENAME.$PANTHEONENV
 
 printf "[\e[0;34mNOTICE\e[0m] Deployed core and wp-config\n"
 
