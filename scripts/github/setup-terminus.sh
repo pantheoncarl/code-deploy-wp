@@ -24,18 +24,9 @@ printf "[\e[0;34mNOTICE\e[0m] Terminus Setup START!!!.\n"
 echo "$PANTHEON_TERMINUS_MACHINE_TOKEN"
 echo $PANTHEON_TERMINUS_MACHINE_TOKEN
 echo PANTHEONEMAIL
-printf "[\e[0;34mNOTICE\e[0m] Terminus Setup asdfasdffds!!.\n"
+printf "[\e[0;34mNOTICE\e[0m] Terminus Setup end!!.\n"
 terminus self:info
 terminus art
 terminus auth:login --machine-token="$PANTHEON_TERMINUS_MACHINE_TOKEN"
 terminus auth:whoami
 #terminus connection:set $PANTHEONSITENAME.$PANTHEONENV sftp
-
-
-
-# ~/terminus/vendor/bin/terminus self:info
-# ~/terminus/vendor/bin/terminus auth:login --machine-token="$MACHINETOKEN" --email="$PANTHEONEMAIL"
-# ~/terminus/vendor/bin/terminus auth:whoami
-# ~/terminus/vendor/bin/terminus connection:set $PANTHEONSITENAME.$PANTHEONENV sftp
-
-# ~/terminus/vendor/bin/terminus art
