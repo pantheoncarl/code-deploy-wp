@@ -68,7 +68,7 @@ terminus art
 MSG1="$GH_REF2"
 export MSG1
 echo ${{ github.event.head_commit.message }}
-echo terminus site:info  --format list --field name -- ${{ PANTHEONSITEUUID }}
+echo terminus site:info  --format list --field name -- $PANTHEONSITEUUID
 
 DEPLOYMSG="Complete rebuild. Deployed from GitHub ${{ github.event.head_commit.message }}"
 export DEPLOYMSG
