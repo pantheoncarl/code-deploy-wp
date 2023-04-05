@@ -43,7 +43,7 @@ cat $SSH_DIR/config
 cat $SSH_DIR/known_hosts
 cat ~/.ssh/known_hosts
 ssh-keygen -R hostname
-/etc/ssh/ssh_config
+sudo cat /etc/ssh/ssh_config
 echo "SSH PRIVATE KEY IMPORTED!!!"
 
 # deploy pantheon yml files
