@@ -1,13 +1,15 @@
 name: 'Deploy WordPress to Pantheon'
 description: 'Deploy WordPress codebase to a Pantheon appserver'
 inputs:
-  PANTHON_PRIVATE_KEY:
+  PANTHEON_PRIVATE_KEY:
     description: "The private RSA key you will save in the Github Secrets"
     required: true
-  PHP_LINT:
-    description: "optional php syntax check"
-    required: false
-    default: false
+  PANTHEON_TERMINUS_MACHINE_TOKEN:
+    description: "The private RSA key you will save in the Github Secrets"
+    required: true
+  PANTHEON_EMAIL:
+    description: "User's email for Pantheon authentication"
+    required: true
   FLAGS:
     description: "Optional flags for the deployment"
     required: false
