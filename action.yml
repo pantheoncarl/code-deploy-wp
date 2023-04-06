@@ -35,7 +35,7 @@ runs:
         GH_REF2: ${{ github.event.head_commit.message }}
         COMMITID: ${{ github.sha }}
       run: |
-        export GH_REF2 =  ${{ github.event.head_commit.message }}
+        export GH_REF3=${COMMITID}
         ${{ github.action_path }}/scripts/github/setup-terminus.sh
         ${{ github.action_path }}/scripts/github/setup-terminus-plugins.sh
         ${{ github.action_path }}/scripts/github/ssh-deploy.sh
