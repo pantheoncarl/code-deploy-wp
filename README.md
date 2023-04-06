@@ -1,15 +1,15 @@
-**Required secret variables:**
+# Required secret variables:
 
-- PANTHEON_PRIVATE_KEY
-- PANTHEON_TERMINUS_MACHINE_TOKEN
+  - PANTHEON_PRIVATE_KEY
+  - PANTHEON_TERMINUS_MACHINE_TOKEN
 
 
 
-**Required variables in the site's repo**
+# Required variables in the site's repo
 
-- PANTHEONSITEUUID
-- PANTHEONEMAIL
-- PANTHEONENV
+  - PANTHEONSITEUUID
+  - PANTHEONEMAIL
+  - PANTHEONENV
 
 
 
@@ -38,9 +38,8 @@ jobs:
       uses: pantheoncarl/code-deploy-wp@main
       id: cache-vendor
       env:
-        CARKONEMAIL: ${{ secrets.PANTHEONEMAIL }}
-        PANTHEONSITEUUID: 8ab85c5b-679a-48cb-9777-520ff283400f
-        PANTHEONEMAIL: carl.alberto@getpantheon.com
+        PANTHEONSITEUUID: 1234abcd-1234-abc-1111-1234abcd
+        PANTHEONEMAIL: example@email.com
         PANTHEON_TERMINUS_MACHINE_TOKEN: ${{ secrets.PANTHEON_TERMINUS_MACHINE_TOKEN }}
         PANTHEON_PRIVATE_KEY: ${{ secrets.PANTHEON_PRIVATE_KEY }}
         PROJECT_ROOT: $(pwd)
