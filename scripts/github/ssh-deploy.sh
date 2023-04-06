@@ -61,27 +61,27 @@ printf "[\e[0;34mNOTICE\e[0m] Deployed plugin and themes\n"
 # deploy core and root files
 #rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' ./web/. --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/web/ --exclude='*.git*' --exclude node_modules/ --exclude wp-content/ --exclude gulp/ --exclude source/
 
-terminus art
+#terminus art
 
 
 
 MSG1="$GH_REF2"
 export MSG1
 #echo ${{ github.event.head_commit.message }}
-terminus site:info  --format list --field name -- $PANTHEONSITEUUID
+#terminus site:info  --format list --field name -- $PANTHEONSITEUUID
 
-echo terminus site:info  --format list --field name -- $PANTHEONSITEUUID
+#echo terminus site:info  --format list --field name -- $PANTHEONSITEUUID
 
-DEPLOYMSG="Complete rebuild. Deployed from GitHub $MSG1"
+DEPLOYMSG="Complete rebuild. Deployed from GitHub $COMMITID<br> $MSG1/n"
 export DEPLOYMSG
 echo "$DEPLOYMSG"
 #echo ::set-env name=PULL_NUMBER::$(echo "$GH_REF2" | awk -F / '{print $3}')
 export SITENAME="$(terminus site:info  --format list --field name -- $PANTHEONSITEUUID)"
 
 
-terminus env:commit --message "$MSG1" --force -- $SITENAME.$PANTHEONENV
+terminus env:commit --message "$DEPLOYMSG" --force -- $SITENAME.$PANTHEONENV
 
-printf "[\e[0;34mNOTICE\e[0m] Deployed core and wp-config\n"
+printf "[\e[0;34mNOTICE\e[0m] Deployed core"
 
 # setup backstop script
 # sh $PROJECT_ROOT/scripts/github/setup-backstop
