@@ -34,8 +34,6 @@ runs:
       env:
         COMMITMSG: ${{ github.event.head_commit.message }}
         COMMITID: ${{ github.sha }}
-        PANTHEON_TERMINUS_MACHINE_TOKEN: ${{ secrets.PANTHEON_TERMINUS_MACHINE_TOKEN }}
-        PANTHEON_PRIVATE_KEY: ${{ secrets.PANTHEON_PRIVATE_KEY }}
       run: |
         export GH_COMMITID=${COMMITID}
         export GH_COMMITMSG=${COMMITMSG}
@@ -44,8 +42,6 @@ runs:
         ${{ github.action_path }}/scripts/github/setup-terminus.sh
         ${{ github.action_path }}/scripts/github/setup-terminus-plugins.sh
         ${{ github.action_path }}/scripts/github/ssh-deploy.sh
-        #${{ github.action_path }}/scripts/github/ssh-deploy-nesteddocroot.sh
-        #${{ github.action_path }}/scripts/github/pantheon-deploy.sh
         printf "[\e[0;34mNOTICE\e[0m] Pantheon Deploy script COMPLETE!!!.\n"
       working-directory: .
       shell: bash
