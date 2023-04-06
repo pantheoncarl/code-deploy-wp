@@ -34,7 +34,7 @@ ls
 if [ -z ${PANTHEONENV+x} ]; 
 	then 
 		echo "PANTHEONENV is unset";
-		export PANTHEONENV = 'dev'
+		export PANTHEONENV=dev
 	else 
 		echo "This will deploy to this environment '$PANTHEONENV'"; 
 fi
