@@ -3,10 +3,11 @@
 export PROJECT_ROOT="$(pwd)"
 . $PROJECT_ROOT/config  
 
+# configure SSH
+printf "[\e[0;34mNOTICE\e[0m] Setting up SSH access to server for rsync usage.\n"
 cd $PROJECT_ROOT
 export PROJECT_ROOT="$(pwd)"
 export GITHUB_BRANCH=${GITHUB_REF##*heads/}
-printf "[\e[0;34mNOTICE\e[0m] Setting up SSH access to server for rsync usage.\n"
 SSH_DIR="$HOME/.ssh"
 
 mkdir -p "$SSH_DIR"
@@ -22,17 +23,16 @@ eval "$(ssh-agent -s)"
 eval `ssh-agent -s`
 ssh-add "$SSH_DIR/id_rsa1"
 ssh-add -l
-cat $SSH_DIR/id_rsa1
-cat $SSH_DIR/config
-cat $SSH_DIR/known_hosts
-cat ~/.ssh/known_hosts
 ssh-keygen -R hostname
 sudo cat ~/.ssh/ssh_config
-echo "SSH PRIVATE KEY IMPORTED!!!"
+printf "[\e[0;34mNOTICE\e[0m] SSH keys configured!\n"
 
 cd $PROJECT_ROOT
 ls
 
+if [ -z ${PANTHEONENV+x} ]; then echo "PANTHEONENV is unset"; else echo "var is set to '$PANTHEONENV'"; fi
+
+terminus connection:set $PANTHEONSITENAME.$PANTHEONENV sftp
 # deploy all files in root
 rsync -rLvzc --size-only --ipv4 --progress -e 'ssh -p 2222' . --temp-dir=~/tmp/ $PANTHEONENV.$PANTHEONSITEUUID@appserver.$PANTHEONENV.$PANTHEONSITEUUID.drush.in:code/ --exclude='*.git*' --exclude node_modules/ --exclude gulp/ --exclude source/ --exclude .github/ --exclude .vscode/
 
