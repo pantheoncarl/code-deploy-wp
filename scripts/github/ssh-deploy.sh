@@ -74,6 +74,7 @@ export MSG1
 
 DEPLOYMSG="Complete rebuild. Deployed from GitHub $COMMITID<br> $MSG1/n"
 export DEPLOYMSG
+echo "$GH_REF3"
 echo "$DEPLOYMSG"
 #echo ::set-env name=PULL_NUMBER::$(echo "$GH_REF2" | awk -F / '{print $3}')
 export SITENAME="$(terminus site:info  --format list --field name -- $PANTHEONSITEUUID)"
