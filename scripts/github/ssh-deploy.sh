@@ -72,7 +72,7 @@ export MSG1
 
 #echo terminus site:info  --format list --field name -- $PANTHEONSITEUUID
 
-DEPLOYMSG="Complete rebuild. Deployed from GitHub $COMMITID<br> $MSG1/n"
+DEPLOYMSG="<h1>Complete rebuild.</h1> <ul><li>Deployed from GitHub $GH_COMMITID</li><li> $GH_COMMITMSG</li></ul>"
 export DEPLOYMSG
 echo "$GH_REF3"
 echo "$DEPLOYMSG"

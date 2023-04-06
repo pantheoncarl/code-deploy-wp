@@ -32,10 +32,15 @@ runs:
   steps:
     - id: deploy
       env:
-        GH_REF2: ${{ github.event.head_commit.message }}
+        COMMITMSG: ${{ github.event.head_commit.message }}
         COMMITID: ${{ github.sha }}
+        PANTHEON_TERMINUS_MACHINE_TOKEN: ${{ secrets.PANTHEON_TERMINUS_MACHINE_TOKEN }}
+        PANTHEON_PRIVATE_KEY: ${{ secrets.PANTHEON_PRIVATE_KEY }}
       run: |
-        export GH_REF3=${COMMITID}
+        export GH_COMMITID=${COMMITID}
+        export GH_COMMITMSG=${COMMITMSG}
+        PANTHEON_TERMINUS_MACHINE_TOKEN=${PANTHEON_TERMINUS_MACHINE_TOKEN}
+        PANTHEON_PRIVATE_KEY=${PANTHEON_PRIVATE_KEY}
         ${{ github.action_path }}/scripts/github/setup-terminus.sh
         ${{ github.action_path }}/scripts/github/setup-terminus-plugins.sh
         ${{ github.action_path }}/scripts/github/ssh-deploy.sh
