@@ -16,8 +16,11 @@ With this Github action, you can:
 
 SSH PUBLIC KEY SETUP IN PANTHEON
 
-Please see this guide https://docs.pantheon.io/ssh-keys
+Please see this guide 
 
+Machine Token Setup
+
+Please see this guide https://docs.pantheon.io/machine-tokens#create-a-machine-token
 
 
 ## YML SETUP
@@ -35,27 +38,25 @@ View your actions progress and logs by navigating to the "Actions" tab in your r
 ## Setup Instructions
 
 
-1. **SSH PUBLIC KEY SETUP IN WP ENGINE**
-* [Generate a new SSH key pair](https://wpengine.com/support/ssh-keys-for-shell-access/#Generate_New_SSH_Key?utm_content=wpe_gha) if you have not already done so. Please note that this SSH Key needs to be *passwordless*.
+1. **SSH PUBLIC KEY SETUP IN Pantheon**
+* [Generate a new SSH key pair](https://docs.pantheon.io/ssh-keys) and add that to your account from that guide.
 
-* Add *SSH Public Key* to WP Engine SSH Gateway Key settings. [This Guide will show you how.](https://wpengine.com/support/ssh-gateway/#Add_SSH_Key?utm_content=wpe_gha)
+2. **Machine Tokens in Pantheon**
+* [Generate a new Machine Token](https://docs.pantheon.io/machine-tokens#create-a-machine-token). This will be needed to control various workflows in Pantheon.
 
-2. **SSH PRIVATE KEY SETUP IN GITHUB**
+3. **Secret token SETUP IN GITHUB**
 
-* Add the *SSH Private Key* to your [Repository Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) or your [Organization Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-an-organization). Save the new secret "Name" as `WPE_SSHG_KEY_PRIVATE`.
+* Add the *SSH Private Key* & *Machine Token*  to your [Repository Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) or your [Organization Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-an-organization). Save the new secret "Name" as `PANTHEON_PRIVATE_KEY` & `PANTHEON_TERMINUS_MACHINE_TOKEN`
 
-3. **YML SETUP**
+4. **YML SETUP**
 
-* Create `.github/workflows/main.yml` directory and file locally.
-Copy and paste the configuration from below, replacing the value under `branches:` and the value for `WPE_ENV:`.
+* Create `.github/workflows/pantheon-deploy.yml` directory and file locally.
+Copy and paste the configuration from the samples below replacing values accordingly.
 
-* To deploy from another branch, simply create another yml file locally for that branch, such as `.github/workflows/stage.yml` and replace the values for `branches:` and  `WPE_ENV:` for that workflow.
-
-This provides the ability to perform a different workflow for different branches/environments. Consult ["Environment Variable & Secrets"](#environment-variables--secrets) for more available options.
-
-4. Git push your site GitHub repo. The action will do the rest!
+5. Git push your site GitHub repo. The action will do the rest!
 
 View your actions progress and logs by navigating to the "Actions" tab in your repo.
+
 
 ## Example GitHub Action workflow
 
@@ -73,7 +74,7 @@ on:
       - main
 
 jobs:
-  github_deploy_to_dev:
+  github_deploy:
 
     runs-on: ubuntu-latest
 
@@ -98,7 +99,7 @@ on:
       - main
 
 jobs:
-  github_deploy_to_dev:
+  github_deploy:
 
     runs-on: ubuntu-latest
 
@@ -109,6 +110,29 @@ jobs:
       id: cache-vendor
       env:
         PANTHEONSITEUUID: 1234abcd-1234-abc-1111-1234abcd
+		PANTHEONENV: multidev1
         PANTHEON_TERMINUS_MACHINE_TOKEN: ${{ secrets.PANTHEON_TERMINUS_MACHINE_TOKEN }}
         PANTHEON_PRIVATE_KEY: ${{ secrets.PANTHEON_PRIVATE_KEY }}
+		PANTHEONENV_AUTODEPLOY: live
 ```
+
+
+## Environment Variables & Secrets
+
+### Required
+
+| Name | Type | Usage |
+|-|-|-|
+| `PANTHEON_PRIVATE_KEY` | secrets | Private SSH Key. |
+| `PANTHEON_TERMINUS_MACHINE_TOKEN` | secrets | Machine Token. |
+| `PANTHEONSITEUUID` | string | Unique ID of the site that you will deploy to. |
+
+### Deploy Options
+
+| Name | Type | Usage |
+|-|-|-|
+| `PANTHEONENV` | string | Environment that your code will be deployed to, cannot beon test and live because it is write only. `dev`(default) and multidevs only. |
+| `PANTHEONENV_AUTODEPLOY` | string | Can be set to auto deploy in `test` or `live`. if not set, it will default to the environment set in `PANTHEONENV` |
+| `SRC_PATH` | string | Optional path to specify a directory within the repo to deploy from. Ex. `"wp-content/plugins/custom-plugin/"`. Defaults to root of repo filesystem as source. |
+| `REMOTE_PATH` | string | Optional path to specify a directory destination to deploy to. Ex. `"wp-content/plugins/custom-plugin/"` . Defaults to WordPress root 
+| `CACHE_CLEAR` | bool | Optionally clear page and CDN cache post deploy. This takes a few seconds. Default is FALSE. |

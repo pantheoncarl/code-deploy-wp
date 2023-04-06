@@ -19,8 +19,8 @@ cd ~
 echo "$PANTHEON_PRIVATE_KEY" > "$SSH_DIR/id_rsa1"
 chmod 600 "$SSH_DIR/id_rsa1"
 chmod 600 "$SSH_DIR/config"
-eval "$(ssh-agent -s)"
-eval `ssh-agent -s`
+#eval "$(ssh-agent -s)"
+#eval `ssh-agent -s`
 ssh-add "$SSH_DIR/id_rsa1"
 ssh-add -l
 ssh-keygen -R hostname
@@ -28,7 +28,6 @@ sudo cat ~/.ssh/ssh_config
 printf "[\e[0;34mNOTICE\e[0m] SSH keys configured!\n"
 
 cd $PROJECT_ROOT
-ls
 
 #Set Defaults
 if [ -z ${PANTHEONENV+x} ]; 

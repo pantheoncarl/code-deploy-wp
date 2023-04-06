@@ -7,9 +7,6 @@ inputs:
   PANTHEON_TERMINUS_MACHINE_TOKEN:
     description: "The private RSA key you will save in the Github Secrets"
     required: true
-  PANTHEON_EMAIL:
-    description: "User's email for Pantheon authentication"
-    required: true
   PANTHEONENV:
     description: "Default env to be deployed,"
     required: false
@@ -24,6 +21,10 @@ inputs:
     default: false
   SRC_PATH:
     description: "An optional source directory to deploy other than the root directory that is being versioned."
+    default: "."
+    required: false
+  REMOTE_PATH:
+    description: "An optional destination directory to deploy other than the root directory that is being versioned."
     default: "."
     required: false
 author: 'carl-alberto'
