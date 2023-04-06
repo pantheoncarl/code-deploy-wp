@@ -14,7 +14,9 @@ chmod +x terminus
 sudo ln -s ~/terminus/terminus /usr/local/bin/terminus
 
 printf "[\e[0;34mNOTICE\e[0m] Terminus Setup end!!.\n"
-terminus self:info
-terminus art
 terminus auth:login --machine-token="$PANTHEON_TERMINUS_MACHINE_TOKEN"
-terminus auth:whoami
+
+#debuginfo
+#terminus auth:whoami
+#terminus self:info
+#terminus art

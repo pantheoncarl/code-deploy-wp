@@ -1,6 +1,4 @@
 #!/bin/bash
 
-export PROJECT_ROOT="$(pwd)"
-. $PROJECT_ROOT/config
-
+# add additional terminus plugins here for future use
 terminus self:plugin:install terminus-rsync-plugin

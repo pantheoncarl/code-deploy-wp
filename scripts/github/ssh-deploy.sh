@@ -30,7 +30,14 @@ printf "[\e[0;34mNOTICE\e[0m] SSH keys configured!\n"
 cd $PROJECT_ROOT
 ls
 
-if [ -z ${PANTHEONENV+x} ]; then echo "PANTHEONENV is unset"; else echo "var is set to '$PANTHEONENV'"; fi
+#Set Defaults
+if [ -z ${PANTHEONENV+x} ]; 
+	then 
+		echo "PANTHEONENV is unset";
+		export PANTHEONENV = 'dev'
+	else 
+		echo "This will deploy to this environment '$PANTHEONENV'"; 
+fi
 
 terminus connection:set $PANTHEONSITENAME.$PANTHEONENV sftp
 # deploy all files in root
