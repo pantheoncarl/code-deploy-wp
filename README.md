@@ -5,34 +5,12 @@ With this Github action, you can:
 
   - Deploy you repo with
     - Whole code repo
-	- To a nested docroot `/web` path
-	- A specific theme, plugin, or any other directory by specifying the LOCAL_PATH and REMOTE_PATH options.
+	- To a nested docroot `/web` path (TODO)
+	- A specific theme, plugin, or any other directory by specifying the LOCAL_PATH and REMOTE_PATH options. (TODO)
   - Post deploy options:
-	- Clear cache 
-	- Auto commit and deploy to `TEST` envionment
-	- Auto commit and deploy to `LIVE` envionment
-
-# Initial setup
-
-SSH PUBLIC KEY SETUP IN PANTHEON
-
-Please see this guide 
-
-Machine Token Setup
-
-Please see this guide https://docs.pantheon.io/machine-tokens#create-a-machine-token
-
-
-## YML SETUP
-
-Create .github/workflows/pantheon-deploy.yml directory and file locally. Copy and paste the sample yml files below and 
-
-To deploy from another branch, simply create another yml file locally for that branch, such as .github/workflows/stage.yml and replace the values for branches: and WPE_ENV: for that workflow.
-
-This provides the ability to perform a different workflow for different branches/environments. Consult "Environment Variable & Secrets" for more available options.
-
-Git push your site GitHub repo. The action will do the rest!
-View your actions progress and logs by navigating to the "Actions" tab in your repo.
+	- Clear cache (TODO)
+	- Auto commit and deploy to `TEST` envionment (TODO)
+	- Auto commit and deploy to `LIVE` envionment (TODO)
 
 
 ## Setup Instructions
